@@ -66,6 +66,7 @@ Refer [The Report](https://github.com/karraNehru/Satellite_Imagery_Based_Propert
 ## Repository Structure
 
 ```
+requirements.txt        # contains the required library installations
 Data_fetcher.py/        # Image Data fetching using lat , long
 preprocessing.ipynb/    # EDA, feature engineering, Preprocessing , train and validation splitting
 model_training/         # training of Tabular, Early, Late fusion models , Exatracting Embeddings
@@ -78,36 +79,57 @@ model_training/         # training of Tabular, Early, Late fusion models , Exatr
 
 > NOTE : Replace and ensure the File Path according to your directory in the scripts and notebooks Before Running.
 also ensure all your files are in same directory else provide full path.
-1. Install [Requirements]()
-In windows Powershell
-```bash
-#create virtual environment
-python -m venv venv
-venv\Scripts\activate
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-In Jupyter Notebook code cell
-```bash
-!pip install -r requirements.txt
-```
+1. Install Requiremnts
+   In windows Powershell
+   ```bash
+   #create virtual environment
+   python -m venv venv
+   venv\Scripts\activate
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+   In Jupyter Notebook code cell
+   ```bash
+   !pip install -r requirements.txt
+   ```
 
 2. Run data_fetcher.py
-
 
    Running `datafetcher.py` will:
    1. Connect to the Mapbox API and fetch images based on property coordinates.
    2. Store all fetched images inside an `images/` directory.
-   3. Automatically create `train/` and `test/` subfolders for dataset splitting.
-Note: ensure your .env contains Map Box Api Token as MAPBOX_KEY = "pk.abc-123n-eh-ru..."
-```bash
-#windows powershell opened with BASE_DIR Location
-python data_fetcher.py
-```
-or run in Jupyter Notebook code cell
-```bash
-%run data_fetcher.py
-```
+   3. Automatically create `train/` and `test/` subfolders.
+   
+   Note: ensure your .env contains Map Box Api Token as MAPBOX_KEY = "pk.abc-123n-eh-ru..."
+   ```bash
+   #windows powershell opened with BASE_DIR Location
+   python data_fetcher.py
+   ```
+   or run in Jupyter Notebook code cell
+   ```bash
+   %run data_fetcher.py
+   ```
+4. Run preprocessing.ipynb
+   In powershell
+   ```bash
+   jupyter notebook preprocessing.ipynb
+   ```
+   or open [preprocessing.ipynb](https://github.com/karraNehru/Satellite_Imagery_Based_Property_Valuation/blob/main/preprocessing.ipynb) in jupyter notebook and Run all cells
+6. Run model_training.ipynb
+   In powershell
+   ```bash
+   jupyter notebook model_training.ipynb
+   ```
+   or open [model_training.ipynb](https://github.com/karraNehru/Satellite_Imagery_Based_Property_Valuation/blob/main/model_training.ipynb) in jupyter notebook and Run all cells
+
+## Output Files
+
+This section summarizes the key output files generated at each stage of the pipeline.
+
+---
+
+### 1. `data_fetcher.py`
+
 **Output Folder Structure Example:**
 ```bash
 images/
@@ -120,18 +142,63 @@ images/
 ├── 1234568000.jpg
 └── ...
 ```
-3. Run preprocessing.ipynb
-   In powershell
-   ```bash
-   jupyter notebook preprocessing.ipynb
-   ```
-   or open [preprocessing.ipynb](https://github.com/karraNehru/Satellite_Imagery_Based_Property_Valuation/blob/main/preprocessing.ipynb) in jupyter notebook and Run all cells
-4. Run model_training.ipynb
-   In powershell
-   ```bash
-   jupyter notebook model_training.ipynb
-   ```
-   or open [model_training.ipynb](https://github.com/karraNehru/Satellite_Imagery_Based_Property_Valuation/blob/main/model_training.ipynb) in jupyter notebook and Run all cells
+
+---
+
+### 2. `preprocessing.ipynb`
+
+**Purpose:**  
+Clean data, engineer features, prevent data leakage, and prepare model-ready inputs.
+
+**Outputs:**
+- `X_train_processed_tab.npy` – Preprocessed tabular training features
+- `X_val_processed_tab.npy` – Preprocessed tabular validation features
+- `test_processed_tab.npy` – Preprocessed tabular test features
+- `y_train_log_tab.npy` – Log-transformed training targets
+- `y_val_log_tab.npy` – Log-transformed validation targets
+- `feature_names.npy` – Final tabular feature names
+- `zip_rank_mapping.pkl` – ZIP code ranking mapping (train-only)
+- `row_ids_train.npy` – Row IDs aligned with training data
+- `row_ids_val.npy` – Row IDs aligned with validation data
+- `test_df_row_ids.npy` – Row IDs aligned with test data
+- `preprocessor.pkl` – Saved sklearn preprocessing pipeline
+
+---
+
+### 3. Model Training (`model_training.ipynb`)
+
+**Purpose:**  
+Train baseline and multimodal models, evaluate performance, and generate explainability outputs.
+
+**Outputs:**
+- **Models**
+  - `xgb_tabular_baseline.pkl` – Trained tabular XGBoost model
+  - `xgb_early_fusion.pkl` – Trained early fusion XGBoost model
+  - `late_fusion_model.pth` – Trained late fusion neural network
+
+- **Image Embeddings**
+  - `img_train_emb.npy` – CNN image embeddings (train)
+  - `img_val_emb.npy` – CNN image embeddings (validation)
+  - `img_test_emb.npy` – CNN image embeddings (test)
+  - `img_pca_180.pkl` – PCA model for image embedding compression
+
+- **Evaluation & Explainability**
+  - `xgb_tabular_baseline_metrics.pkl` – Baseline evaluation metrics
+  - `xgb_early_fusion_metrics.pkl` – Early fusion evaluation metrics
+  - `xgb_feature_importance.csv` – Feature importance scores
+  - `gradcam_best_*.png` – Grad-CAM visualizations (best predictions)
+  - `gradcam_worst_*.png` – Grad-CAM visualizations (worst predictions)
+
+- **Predictions**
+  - `Submission.csv`   – Final test set price predictions
+ 
+  - renamed as `23118039_final.csv` here
+
+---
+
+> Note: Large Cell outputs (some images,NumPy arrays,model parameters , Markdown formatting ) are Cleared for GitHub Renderability but can be regenerated by running the pipeline end-to-end.
+
+
 
 
 
