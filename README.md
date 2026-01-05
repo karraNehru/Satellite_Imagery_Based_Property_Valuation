@@ -61,7 +61,7 @@ This script retrieves satellite or map images corresponding to each property ent
 - Evaluated to test nonlinear fusion effectiveness
 
 ## Result summary and Explainability
-Refer [The Report](https://github.com/karraNehru/Satellite_Imagery_Based_Property_Valuation/edit/main/README.md) for complete summary and clear Explaination
+Refer [The Report](https://github.com/karraNehru/Satellite_Imagery_Based_Property_Valuation/blob/main/23118039_report.pdf) for complete summary and clear Explaination
 
 ## Repository Structure
 
@@ -74,9 +74,10 @@ model_training/         # training of Tabular, Early, Late fusion models , Exatr
 ```
 
 ## **How To Run?**
-NOTE : Replace and ensure the File Path according to your directory in the scripts and notebooks Before Running.
-also ensure all your files are in same directory else provide full path.
 > The notebooks were originally coded and exeguted on google colab notebook so, it includes file paths and google drive connection related codes. please remove them if running notebooks in powershell or local Jupyter Notebook
+
+> NOTE : Replace and ensure the File Path according to your directory in the scripts and notebooks Before Running.
+also ensure all your files are in same directory else provide full path.
 1. Install [Requirements]()
 In windows Powershell
 ```bash
@@ -124,13 +125,14 @@ images/
    ```bash
    jupyter notebook preprocessing.ipynb
    ```
-   or open [preprocessing.ipynb]() in jupyter notebook and Run all cells
+   or open [preprocessing.ipynb](https://github.com/karraNehru/Satellite_Imagery_Based_Property_Valuation/blob/main/preprocessing.ipynb) in jupyter notebook and Run all cells
 4. Run model_training.ipynb
    In powershell
    ```bash
    jupyter notebook model_training.ipynb
    ```
-   or open [model_training.ipynb]() in jupyter notebook and Run all cells
+   or open [model_training.ipynb](https://github.com/karraNehru/Satellite_Imagery_Based_Property_Valuation/blob/main/model_training.ipynb) in jupyter notebook and Run all cells
+
 
 
 
