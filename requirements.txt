@@ -1,0 +1,26 @@
+# Data handling
+numpy
+pandas
+scipy
+
+# Data fetching & utilities
+requests
+python-dotenv
+tqdm
+
+# Visualization
+matplotlib
+seaborn
+
+# Machine Learning
+scikit-learn
+xgboost
+joblib
+shap
+
+# Deep Learning & Vision
+torch
+torchvision
+timm
+opencv-python
+Pillow
