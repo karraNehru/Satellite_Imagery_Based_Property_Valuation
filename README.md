@@ -75,8 +75,8 @@ model_training/         # training of Tabular, Early, Late fusion models , Exatr
 
 ## **How To Run?**
 NOTE : Replace and ensure the File Path according to your directory in the scripts and notebooks Before Running.
-
 also ensure all your files are in same directory else provide full path.
+> The notebooks were originally coded and exeguted on google colab notebook so, it includes file paths and google drive connection related codes. please remove them if running notebooks in powershell or local Jupyter Notebook
 1. Install [Requirements]()
 In windows Powershell
 ```bash
@@ -131,6 +131,7 @@ images/
    jupyter notebook model_training.ipynb
    ```
    or open [model_training.ipynb]() in jupyter notebook and Run all cells
+
 
 
 
